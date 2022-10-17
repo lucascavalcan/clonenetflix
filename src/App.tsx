@@ -28,6 +28,7 @@ const App = () => {
       let chosenInfo = await api.getMovieInfo(chosen.id, "tv");
 
       console.log(chosenInfo);
+      setFeaturedData(chosenInfo)
     }
 
     loadAll();

@@ -1,3 +1,5 @@
+import { MovieFeatured } from "./types/MovieFeatured";
+
 const apiKey = "1eba2dcc3c79340337137c5d843d737a";
 const base = 'https://api.themoviedb.org/3';
 
@@ -6,13 +8,6 @@ const basicFetch = async (endpoint: string) => {
     const req = await fetch(`${base}${endpoint}`);
     const json = await req.json();
     return json;
-    
-
-};
-
-const basicFetch2 = async (endpoint: string) => {
-    const req = await fetch(`${base}${endpoint}`);
-    return req;
     
 
 };
@@ -73,15 +68,15 @@ export const api = {
 
     //pegar informações extras de um filme específico
     getMovieInfo: async (movieId: number, type: string) => {
-        let info = {};
+        let info= {};
 
         if (movieId) {
             switch(type) {
                 case "movie":
-                    info = await basicFetch2(`movie/${movieId}?language=pt-BR&api_key=${apiKey}`);
+                    info = await basicFetch(`/movie/${movieId}?language=pt-BR&api_key=${apiKey}`);
                 break;
                 case "tv":
-                    info = await basicFetch2(`tv/${movieId}?language=pt-BR&api_key=${apiKey}`);
+                    info = await basicFetch(`/tv/${movieId}?language=pt-BR&api_key=${apiKey}`);
                 break;
                 default:
                     info = {};
