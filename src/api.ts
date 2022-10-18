@@ -67,24 +67,12 @@ export const api = {
     },
 
     //pegar informações extras de um filme específico
-    getMovieInfo: async (movieId: number, type: string) => {
-        let info= {};
-
-        if (movieId) {
-            switch(type) {
-                case "movie":
-                    info = await basicFetch(`/movie/${movieId}?language=pt-BR&api_key=${apiKey}`);
-                break;
-                case "tv":
-                    info = await basicFetch(`/tv/${movieId}?language=pt-BR&api_key=${apiKey}`);
-                break;
-                default:
-                    info = {};
-                break;
-                
-            }
-        }
-
-        return info;
-    }
+    getMovieInfo: async (id: number) => { 
+        const endpoint = `/movie/${id}?language=pt-BR&api_key=${apiKey}`; 
+        return basicFetch(endpoint); 
+      }, 
+    getTvShowInfo: async (id: number):Promise<MovieFeatured> => { 
+        const endpoint = `/tv/${id}?language=pt-BR&api_key=${apiKey}`; 
+        return basicFetch(endpoint); 
+    },
 };

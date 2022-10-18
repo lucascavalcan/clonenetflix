@@ -25,7 +25,7 @@ const App = () => {
       let chosen = originals[0].items.results[randomChosen];
 
       //pegando infos extras desse filme
-      let chosenInfo = await api.getMovieInfo(chosen.id, "tv");
+      let chosenInfo = await api.getTvShowInfo(chosen.id);
 
       console.log(chosenInfo);
       setFeaturedData(chosenInfo)
