@@ -7,4 +7,8 @@ export type MovieFeatured = {
     vote_average: number;
     number_of_seasons: number;
     overview: string;
+    first_air_date: Date;
+    genres: [
+        {id: number, name: string}
+    ];
 }
