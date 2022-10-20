@@ -9,10 +9,13 @@ import { MovieRow } from "./components/MovieRow";
 import { FeaturedMovie } from "./components/FeaturedMovie";
 import { Header } from "./components/Header";
 
+import Loading from "./assets/loading.gif"
+
 const App = () => {
   
   const [movieList, setMovieList] = useState<MovieLists[]>([]);
   const [featuredData, setFeaturedData] = useState<null | MovieFeatured>(null);
+  const [blackHeader, setBlackHeader] =useState<boolean>(false)
 
   useEffect(()=>{
     async function loadAll() {
@@ -35,10 +38,26 @@ const App = () => {
     loadAll();
   }, []);
 
+  useEffect(()=>{
+    const scrollListener = () => {
+        if (window.scrollY > 10) {
+          setBlackHeader(true);
+        } else {
+          setBlackHeader(false);
+        }
+    };
+
+    window.addEventListener("scroll", scrollListener);
+
+    return () => {
+      window.removeEventListener("scroll", scrollListener)
+    }
+  }, []);
+
   return (
     <div className="page">
 
-      <Header/>
+      <Header black={blackHeader}/>
 
       {featuredData &&
         <FeaturedMovie item={featuredData}/>
@@ -50,6 +69,19 @@ const App = () => {
         ))}
 
       </section>
+
+      <footer>
+          Feito com <span role="img" aria-label="coração">❤️</span> por Lucas Cavalcanti. <br/>
+          Direitos de imagem para NetFlix. <br/>
+          Dados pegos do site Themoviedb.org
+      </footer>
+
+      {movieList.length <= 0 &&
+        <div className="loading">
+          <img src={Loading} alt="Carregando"/>
+        </div>
+      }
+
     </div>
   )
 };
