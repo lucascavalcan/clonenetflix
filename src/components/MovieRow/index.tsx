@@ -11,7 +11,7 @@ type Props = {
 
 export const MovieRow = ({items, title }: Props) => {
     
-    const [scrollX, setScrollX] = useState<number>(-400)
+    const [scrollX, setScrollX] = useState<number>(0)
 
     function handleLeftArrow() {
         let x = scrollX + Math.round(window.innerWidth / 2);

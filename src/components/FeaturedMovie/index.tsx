@@ -15,6 +15,11 @@ export const FeaturedMovie = (item: Props) => {
         genres.push(item.item.genres[i].name);
     }
     
+    let description = item.item.overview;
+    if (description.length > 200) {
+        description = description.substring(0, 200)+"...";
+    }
+
     return (
         <section className="featured" style={{
             backgroundSize: "cover",
@@ -30,7 +35,7 @@ export const FeaturedMovie = (item: Props) => {
                         <div className="featured--points">{item.item.vote_average} pontos</div>
                         <div className="featured--year">{firstDate.getFullYear()}</div>
                         <div className="featured--seasons">{item.item.number_of_seasons} temporada{item.item.number_of_seasons !==1 ? "s" : ""}</div>
-                        <div className="featured--description">{item.item.overview}</div>
+                        <div className="featured--description">{description}</div>
                         <div className="featured--buttons">
                             <a href={`/watch/${item.item.id}`} className="featured--watchButton">▶ Assistir</a>
                             <a href={`/list/${item.item.id}`} className="featured--mylistButton">+ Minha Lista</a>
